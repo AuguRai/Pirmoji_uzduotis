@@ -1,4 +1,4 @@
-#include "MyLib.h";
+#include "MyLib.h"
 
 struct duomenys
 {
@@ -11,7 +11,7 @@ struct duomenys
 
 duomenys ivedimas();
 string to_lower(string input);
-bool ar_skaicius(string s);
+bool ar_raide(string s);
 void tikrinti_str(string& input);
 void tikrinti_int(int& input);
 void galutinis_bal(duomenys stud_sar[], int& st_sk, string& txt);
@@ -117,11 +117,11 @@ string to_lower(string input)
     return choice;
 }
 
-bool ar_skaicius(string s)
+bool ar_raide(string s)
 {
     int count = 0;
     for (int i = 0; i < s.length(); i++)
-        if (isdigit(s[i]) == false)
+        if (isalpha(s[i]) != 0)
             count++;
     if (count == s.length())
         return false;
@@ -133,7 +133,7 @@ void tikrinti_str(string& input)
     bool tikrinti;
     while (true)
     {
-        tikrinti = ar_skaicius(input);
+        tikrinti = ar_raide(input);
         if (tikrinti == true)
         {
             cin.clear();
@@ -175,7 +175,7 @@ void galutinis_bal(duomenys stud_sar[], int& st_sk, string& txt)
         else
             cout << "Ivedete neteisingai! Iveskite tik 'mediana' arba 'vidurkis'" << endl;
     }
-    
+
     for (int i = 0; i < st_sk; i++)
     {
         if (stud_sar[i].nd_rez.size() == 0)
@@ -200,7 +200,7 @@ void galutinis_bal(duomenys stud_sar[], int& st_sk, string& txt)
                 vid = stud_sar[i].nd_rez[vidurys];
             if (stud_sar[i].nd_rez.size() == 1)
                 vid = stud_sar[i].nd_rez[0];
-            if(stud_sar[i].nd_rez.size() % 2 == 0)
+            if (stud_sar[i].nd_rez.size() % 2 == 0)
                 vid = double(stud_sar[i].nd_rez[vidurys] + stud_sar[i].nd_rez[vidurys - 1]) / 2;
         }
         stud_sar[i].galutinis = 0.4 * vid + 0.6 * stud_sar[i].egz_rez;
