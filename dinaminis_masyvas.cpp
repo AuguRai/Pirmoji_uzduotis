@@ -10,34 +10,29 @@ struct duomenys
     double galutinis;
 };
 
-duomenys ivedimas(int& nd_sk);
+duomenys ivedimas();
 string to_lower(string input);
 bool ar_raide(string s);
 void tikrinti_str(string& input);
 void tikrinti_int(int& input);
-void galutinis_bal(duomenys stud_sar[], int st_sk, int kiek_nd[], string& txt);
+void galutinis_bal(duomenys stud_sar[], int st_sk, string& txt);
 void isvedimas(duomenys stud_sar[], int st_sk, string txt);
 string to_lower(string input);
 
 int main()
 {
-    srand((time(0)));
     int st_sk = 0;
-
     int nd_sk = 0;
     string txt;
     duomenys stud_sar[500];
-    int kiek_nd[500];
     cout << "Iveskite studentu kieki: ";
     cin >> st_sk;
     tikrinti_int(st_sk);
     for (int i = 0; i < st_sk; i++)
     {
-        stud_sar[i] = ivedimas(nd_sk);
-        kiek_nd[i] = nd_sk;
-        cout << kiek_nd[i] << endl;
+        stud_sar[i] = ivedimas();
     }
-    galutinis_bal(stud_sar, st_sk, kiek_nd, txt);
+    galutinis_bal(stud_sar, st_sk, txt);
     isvedimas(stud_sar, st_sk, txt);
     for (int j = 0; j < st_sk; j++)
     {
@@ -45,11 +40,14 @@ int main()
     }
 }
 
-duomenys ivedimas(int& nd_sk)
+duomenys ivedimas()
 {
     duomenys asmuo;
+    using hrClock = std::chrono::high_resolution_clock;
+    std::mt19937 mt(static_cast<long unsigned int> (hrClock::now().time_since_epoch().count()));
+    std::uniform_int_distribution<int> dist(1,10);
     int nd_rezultatai = 0;
-    nd_sk = 0;
+    int nd_sk = 0;
     int random_sk;
     string ats;
     asmuo.nd_rez = nullptr;
@@ -92,7 +90,7 @@ duomenys ivedimas(int& nd_sk)
         {
             if (nd_sk == random_sk)
                 break;
-            nd_rezultatai = 1 + (rand() % 10);
+            nd_rezultatai = dist(mt);
         }
 
         if (nd_rezultatai >= 1 and nd_rezultatai <= 10)
@@ -186,7 +184,7 @@ void tikrinti_int(int& input)
     }
 }
 
-void galutinis_bal(duomenys stud_sar[], int st_sk, int kiek_nd[], string& txt)
+void galutinis_bal(duomenys stud_sar[], int st_sk, string& txt)
 {
     double vid;
     string choice;
@@ -208,29 +206,32 @@ void galutinis_bal(duomenys stud_sar[], int st_sk, int kiek_nd[], string& txt)
         if (kiek == 0)
         {
             stud_sar[i].galutinis = 0;
-            return;
-        };
-        if (to_lower(choice) == "vidurkis")
+        }
+        else
         {
-            txt = "Galutinis (Vid.)";
-            rez = 0;
-            for (int j = 0; j < kiek; j++)
+          if (to_lower(choice) == "vidurkis")
+          {
+              txt = "Galutinis (Vid.)";
+              rez = 0;
+              for (int j = 0; j < kiek; j++)
                 rez = rez + stud_sar[i].nd_rez[j];
-            vid = rez / kiek;
+              vid = rez / kiek;
+          }
+          if (to_lower(choice) == "mediana")
+          {
+              txt = "Galutinis (Med.)";
+              sort(stud_sar[i].nd_rez, stud_sar[i].nd_rez + kiek);
+              vidurys = kiek / 2;
+              if (kiek % 2 != 0 and kiek != 1)
+                  vid = stud_sar[i].nd_rez[int(vidurys)];
+              if (kiek == 1)
+                  vid = stud_sar[i].nd_rez[0];
+              if (kiek % 2 == 0)
+                  vid = double(stud_sar[i].nd_rez[int(vidurys)] + stud_sar[i].nd_rez[int(vidurys) - 1]) / 2;
+          }
+          stud_sar[i].galutinis = 0.4 * vid + 0.6 * stud_sar[i].egz_rez;
         }
-        if (to_lower(choice) == "mediana")
-        {
-            txt = "Galutinis (Med.)";
-            sort(stud_sar[i].nd_rez, stud_sar[i].nd_rez + kiek);
-            vidurys = kiek / 2;
-            if (kiek % 2 != 0 and kiek != 1)
-                vid = stud_sar[i].nd_rez[int(vidurys)];
-            if (kiek == 1)
-                vid = stud_sar[i].nd_rez[0];
-            if (kiek % 2 == 0)
-                vid = double(stud_sar[i].nd_rez[int(vidurys)] + stud_sar[i].nd_rez[int(vidurys) - 1]) / 2;
-        }
-        stud_sar[i].galutinis = 0.4 * vid + 0.6 * stud_sar[i].egz_rez;
+        
     }
 }
 void isvedimas(duomenys st_sar[], int st_sk, string txt)
