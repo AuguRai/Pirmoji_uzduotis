@@ -20,7 +20,6 @@ string to_lower(string input);
 
 int main()
 {
-    srand((time(0)));
     int st_sk = 0;
     string txt;
     duomenys stud_sar[500];
@@ -32,10 +31,14 @@ int main()
 
     galutinis_bal(stud_sar, st_sk, txt);
     isvedimas(stud_sar, st_sk, txt);
+  return 0;
 }
 
 duomenys ivedimas()
 {
+    using hrClock = std::chrono::high_resolution_clock;
+    std::mt19937 mt(static_cast<long unsigned int> (hrClock::now().time_since_epoch().count()));
+    std::uniform_int_distribution<int> dist(1,10);
     duomenys asmuo;
     asmuo.nd_rez.reserve(1000);
     int nd_rezultatai = 0;
@@ -80,8 +83,7 @@ duomenys ivedimas()
         {
             if (asmuo.nd_rez.size() == random_sk)
                 break;
-            nd_rezultatai = 1 + (rand() % 10);
-            cout << nd_rezultatai << endl;
+            nd_rezultatai = dist(mt);
         }
 
         if (nd_rezultatai >= 1 and nd_rezultatai <= 10)
