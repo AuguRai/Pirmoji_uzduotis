@@ -222,7 +222,7 @@ void write_to_file(vector<duomenys> &data, string result_file)
 vector<duomenys> grouping(vector<duomenys>& visi)
 {
     vector<duomenys> vargsiukai;
-    vector <duomenys> kietieji;
+    vector <duomenys> galvociai;
     auto start = std::chrono::high_resolution_clock::now();
     int i = visi.size();
     while (i > 0)
@@ -231,12 +231,12 @@ vector<duomenys> grouping(vector<duomenys>& visi)
             vargsiukai.push_back(visi[i-1]);
         
         else
-            kietieji.push_back(visi[i - 1]);
+            galvociai.push_back(visi[i - 1]);
         
         visi.erase(visi.end()-1);
         i--;
     }
-    visi = kietieji;
+    visi = galvociai;
 
     reverse(visi.begin(), visi.end());
     reverse(vargsiukai.begin(), vargsiukai.end());
