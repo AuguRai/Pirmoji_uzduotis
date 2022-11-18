@@ -1,1 +1,3 @@
 # v0.1
+
+Šioje versijoje prašoma vartotojo įvesti vardą, pavardę, namų darbų ir egzamino rezultatus. Įvesdamas duomenis, vartotojas turi galimybę pasirinkti egzamino bei namų darbų rezultatų atsitiktinį sugeneravimą. Programoje įvedimas veikia tol, kol vartotojas įveda prie vardo 0.  Pasibaigus duomenų įvedimui yra skaičiuojami kiekvieno studento galutiniai balai. Vartotojas gali pasirinkti, pagal ką nori, kad galutinis balas būtų skaičiuojamas: pagal medianą ar pagal vidurkį. Rezultatai parodomi ekrane. Iš viso programa yra realizuota dviem būdais: saugant duomenis masyve ir vektoriuje. Studentų duomenų saugojimui naudojamos struktūros.
