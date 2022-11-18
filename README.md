@@ -1,10 +1,10 @@
 # v0.1
 
-Šioje versijoje prašoma vartotojo įvesti vardą, pavardę, namų darbų ir egzamino rezultatus. Įvesdamas duomenis, vartotojas turi galimybę pasirinkti egzamino bei namų darbų rezultatų atsitiktinį sugeneravimą. Programoje įvedimas veikia tol, kol vartotojas įveda prie vardo 0.  Pasibaigus duomenų įvedimui, yra skaičiuojami kiekvieno studento galutiniai balai. Vartotojas gali pasirinkti, pagal ką nori, kad galutinis balas būtų skaičiuojamas: pagal medianą ar pagal vidurkį. Rezultatai parodomi ekrane. Iš viso programa yra realizuota dviem būdais, saugant duomenis masyve ir vektoriuje. Be to, studentų duomenų saugojimui naudojamos struktūros.
+Šioje versijoje prašoma vartotojo įvesti vardą, pavardę, namų darbų ir egzamino rezultatus. Įvesdamas duomenis, vartotojas turi galimybę pasirinkti egzamino bei namų darbų rezultatų atsitiktinį sugeneravimą. Programoje įvedimas veikia tol, kol vartotojas įveda prie vardo 0.  Pasibaigus duomenų įvedimui yra skaičiuojami kiekvieno studento galutiniai balai. Vartotojas gali pasirinkti, pagal ką nori, kad galutinis balas būtų skaičiuojamas: pagal medianą ar pagal vidurkį. Rezultatai parodomi ekrane. Iš viso programa yra realizuota dviem būdais: saugant duomenis masyve ir vektoriuje. Studentų duomenų saugojimui naudojamos struktūros.
 
 # v0.2
 
-Programa realizuota tik su vektoriaus tipo konteineriu. Šioje versijoje vartotojas jau gali ne tik pats įvesti duomenis, tačiau ir pasirinkti juos nuskaityti iš failo. Pasirinkus nuskaitymą iš failo, nuskaityti duomenys yra apdorojami: suskaičiuojami galutiniai rezultatai pagal medianą ir vidurkį. Galiausiai studentai yra išrūšiuojami pagal vardus (jei jie sutampa, pagal pavardes) ir studento vardas, pavardė, galutiniai rezultatai išvedami į failą. Programa buvo suskaidyta į kelis “.cpp” ir antraštinius failus. Programos veikimas buvo apsaugotas nuo vartotojo klaidingų įvesčių naudojant išimtis.
+Programa realizuota tik su vektoriaus tipo konteineriu. Šioje versijoje vartotojas jau gali ne tik pats įvesti duomenis, tačiau ir pasirinkti juos nuskaityti iš failo. Pasirinkus nuskaitymą iš failo, nuskaityti duomenys yra apdorojami: suskaičiuojami galutiniai rezultatai pagal medianą ir vidurkį. Galiausiai studentai yra išrūšiuojami pagal vardus (jei jie sutampa, pagal pavardes). Studento vardas, pavardė, galutiniai rezultatai išvedami į failą. Programos veikimas yra apsaugotas nuo vartotojo klaidingų įvesčių naudojant išimtis.
 
 # v0.3
 
@@ -53,3 +53,51 @@ Tiek surūšiuojant (padalijant į dvi grupes), tiek nuskaitant "list" konteiner
 **CPU:** AMD Ryzen 5 5600H with Radeon Graphics 3.30 GHz
 **RAM:** 2x8 GB, speed: 3200 MHz
 **SSD:** 1TB, sequential read: 3500 MB/s, sequential write: 3200MB/s, random read: 250,000 IOPS, random write: 440,000 IOPS
+
+# v1.0
+
+Šioje versijoje praplėstos programos testavimo galimybės . Vartotojas gali pasirinkti testuoti programą pagal strategijas. Kaip ir ankstesnėse versijose programa testuojama su 1000, 10000, 100000, 1000000 ir 10000000 duomenų. Nulinėje, pirmojoje ir antrojoje strategijose studentai, esantys „vector“ ir „list“ konteineriuose, yra suskaidomi į „vargšiukus“ ir „galvočius“. Trečiojoje strategijoje minėtas suskaidymas vyksta tik „vector“ tipo konteineryje. Kiekvienoje strategijoje studentai yra surūšiuojami pagal vidurkius.
+
+Nulinėje strategijoje skaidymas prasideda nuo konteinerių galo. Iš pradinio studentų konteinerio nuo galo po vieną imami studentai, kiekvienas studentas priskiriamas „vargšiukų“ arba „galvočių“ grupei. Priskirtas studentas yra perkeliamas į priskirtą grupę ir ištrinamas iš pradinio konteinerio.
+
+**Surūšiavimo greičio palyginimas 0 strategija** (namų darbų skaičius: 5)
+|  | Vector | List |
+| :---         |     :---:      |          :---: |
+| 1000 duomenų   | 0.0132872s     | 0.0034968s   |                                
+| 10000 duomenų    | 0.121878s       | 0.0376046s      |
+| 100000 duomenų    | 1.29671s      | 0.426073s     |
+| 1000000 duomenų    | 15.7868s      | 4.58445s      |
+| 10000000 duomenų    | 162.357s       | 51.0265s          |
+
+Pirmojoje strategijoje skaidymo metu duomenys apie kiekvieną studentą lieka tiek pradiniame „list“ arba „vector“ tipo konteineryje, tiek naujuose („vargšiukai“ ir „galvočiai“) konteineriuose. Tokiu būdu skaidymas vyksta gana efektyviai tiek „vector“ tipo, tiek „list“ tipo konteineryje, tačiau bereikalingai naudojama atmintis. Su kiekvienais duomenimis greičiausiai grupavimas vyksta "list" tipo konteineryje.
+
+**Surūšiavimo greičio palyginimas 1 strategija** (namų darbų skaičius: 5)
+|  | Vector | List |
+| :---         |     :---:      |          :---: |
+| 1000 duomenų   | 0.0124179s     | 0.0032327s   |                                
+| 10000 duomenų    | 0.128164s       | 0.0380096s      |
+| 100000 duomenų    | 1.41409s      | 0.457079s     |
+| 1000000 duomenų    | 16.7133s      | 5.10889s      |
+| 10000000 duomenų    | 173.631s       | 63.1867s          |
+
+Antrojoje strategijoje skaidymo metu naudojamas tik vienas naujas „list“ arba „vector“ tipo konteineris „vargšiukai“. Skaidant studentai, turintys mažesnį nei 5 galutinį vidurkio balą, yra perkeliami į naują konteinerį „vargšiukai“. Studentai, kurie buvo perkelti į konteinerį „vargšiukai“ yra ištrinami iš pradinio konteinerio. Skirstant studentus šiuo būdu atmintis yra naudojama efektyviau nei antrojoje strategijoje, tačiau „vector“ tipo konteineryje grupavimas labai suletėja.
+
+**Surūšiavimo greičio palyginimas 2 strategija** (namų darbų skaičius: 5)
+|  | Vector | List |
+| :---         |     :---:      |          :---: |
+| 1000 duomenų   | 0.129969s     | 0.0014597s   |                                
+| 10000 duomenų    | 13.6024s       | 0.0161018s      |
+| 100000 duomenų    | 2058.53s      | 0.205447s     |
+| 1000000 duomenų    | -      | 2.57958s      |
+| 10000000 duomenų    |  -      | 30.3356s          |
+
+Trečiojoje strategijoje grupavimui panaudojama „copy_if()“ funkcija. Tokiu būdu visi „vargšiukai“ perkeliami į naują konteinerį. Vėliau, naudojant erase() ir remove_if() funkcijas „vargšiukai“ pašalinami iš pradinio konteinerio, jame lieka tik „galvočiai“. Šiuo būdu „vector“ tipo konteineryje duomenų sugrupavimas vyksta efektyviai.
+
+**Surūšiavimo greičio palyginimas 3 strategija** (namų darbų skaičius: 5)
+|  | Vector |
+| :---         |     :---:      |
+| 1000 duomenų   | 0.0120514s     |                                
+| 10000 duomenų    | 0.129385s       |
+| 100000 duomenų    | 1.36529s      |
+| 1000000 duomenų    | 15.6844s      | 
+| 10000000 duomenų    | 163.276s       | 
