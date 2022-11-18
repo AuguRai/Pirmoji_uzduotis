@@ -11,7 +11,6 @@ Programa realizuota tik su vektoriaus tipo konteineriu. Šioje versijoje vartoto
 V0.3 versijoje papildyta galimybė vartotojui pasirinkti automatinį failų sukūrimą. Pasirinkus šią funkciją yra sukuriami 5 failai, susidedantys iš 1000, 10000, 100000, 1000000, 10000000 duomenų. Failai yra pirmiausia automatiškai užpildomi duomenimis ir po to nuskaitomi. Duomenys, kaip ir kitose versijose, susideda iš studento vardo, pavardės, namų darbų ir egzamino rezultatų. Namų darbų pažymių skaičius sugeneruojamas atsitiktinai (intervale nuo 4 iki 8). Vėliau programoje apskaičiuojami kiekvieno studento pažymių vidurkio ir medianos galutiniai balai, studentai suskirstomi pagal galutinį balą į dvi grupes „vargšiukai“ ir „galvočiai“. Studentai, turintys galutinį balą, mažesnį nei 5, patenka į „vargšiukų“ grupę, likę į „galvočių“. Galiausiai, yra sukuriami 2 failai, į kuriuos išvedami į „vargšiukų“ arba į „galvočių“ grupes patekę studentai.
 
 
-
 **Lentelėje pateikta programos greičio analizė:**
 
 |                                                             | Failų sukūrimas | Failų nuskaitymas | Failų surūšiavimas | Išvedimas į 2 naujus failus |
@@ -91,7 +90,7 @@ Antrojoje strategijoje skaidymo metu naudojamas tik vienas naujas „list“ arb
 | 1000000 duomenų    | -      | 2.57958s      |
 | 10000000 duomenų    |  -      | 30.3356s          |
 
-Trečiojoje strategijoje grupavimui panaudojama „copy_if()“ funkcija. Tokiu būdu visi „vargšiukai“ perkeliami į naują konteinerį. Vėliau, naudojant erase() ir remove_if() funkcijas „vargšiukai“ pašalinami iš pradinio konteinerio, jame lieka tik „galvočiai“. Šiuo būdu „vector“ tipo konteineryje duomenų sugrupavimas vyksta efektyviai.
+Trečiojoje strategijoje grupavimui panaudojama „copy_if()“ funkcija. Tokiu būdu visi „vargšiukai“ perkeliami į naują konteinerį. Vėliau, naudojant erase() ir remove_if() funkcijas „vargšiukai“ pašalinami iš pradinio konteinerio, jame lieka tik „galvočiai“. Šiuo būdu „vector“ tipo konteineryje duomenų sugrupavimas vyksta efektyviai. 
 
 **Surūšiavimo greičio palyginimas 3 strategija** (namų darbų skaičius: 5)
 |  | Vector |
